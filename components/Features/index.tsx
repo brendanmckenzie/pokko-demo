@@ -1,75 +1,46 @@
 import React from "react";
 
-type FeatureSectionProps = {};
+type FeatureSectionItem = { imageUrl: string };
 
-export const FeatureSection: React.FC<FeatureSectionProps> = () => (
+type FeatureSectionProps = {
+  title: string;
+  summary: string;
+  imageUrl: string;
+  items: FeatureSectionItem[];
+};
+
+export const FeatureSection: React.FC<FeatureSectionProps> = ({
+  title,
+  summary,
+  imageUrl,
+  items,
+}) => (
   <React.Fragment>
     <section id="features" className="feature-section ptb-100">
       <div className="container">
         <div className="row align-items-center justify-content-between">
           <div className="col-md-4">
             <div className="download-img d-flex align-bottom">
-              <img
-                src="img/image-14.png"
-                alt="download"
-                className="img-fluid"
-              />
+              <img src={imageUrl} alt="download" className="img-fluid" />
             </div>
           </div>
           <div className="col-md-7">
             <div className="feature-contents section-heading">
-              <h2>
-                Share your photos with <br />
-                <span>friends easily</span>
-              </h2>
-              <p>
-                Objectively deliver professional value with diverse
-                web-readiness. Collaboratively transition wireless customer
-                service without goal-oriented catalysts for change.
-                Collaboratively.
-              </p>
-              <p>
-                Uniquely simplify sustainable applications whereas adaptive
-                schemas. Competently brand performance based content and.
-              </p>
+              <h2>{title}</h2>
+              {summary}
 
               <ul className="list-inline mt-5">
-                <li className="list-inline-item">
-                  <div className="mr-3 icon-box border">
-                    <img
-                      src="img/image-icon-2.png"
-                      alt="icon"
-                      className="img-fluid"
-                    />
-                  </div>
-                </li>
-                <li className="list-inline-item">
-                  <div className="mr-3 icon-box border">
-                    <img
-                      src="img/image-icon-3.png"
-                      alt="icon"
-                      className="img-fluid"
-                    />
-                  </div>
-                </li>
-                <li className="list-inline-item">
-                  <div className="mr-3 icon-box border">
-                    <img
-                      src="img/image-icon-4.png"
-                      alt="icon"
-                      className="img-fluid"
-                    />
-                  </div>
-                </li>
-                <li className="list-inline-item">
-                  <div className="mr-3 icon-box border">
-                    <img
-                      src="img/image-icon-1.png"
-                      alt="icon"
-                      className="img-fluid"
-                    />
-                  </div>
-                </li>
+                {items.map((item, idx) => (
+                  <li key={idx} className="list-inline-item">
+                    <div className="mr-3 icon-box border">
+                      <img
+                        src={item.imageUrl}
+                        alt="icon"
+                        className="img-fluid"
+                      />
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

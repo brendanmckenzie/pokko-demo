@@ -49,8 +49,44 @@ const IndexPage = () => (
           },
         ]}
       />
-      <About />
-      <FeatureSection />
+      <About
+        title="Use your android or ios device to manage everything."
+        subtitle="Proactively syndicate open-source e-markets after low-risk high-yield synergy. Professionally simplify visionary technology."
+        imageUrl="img/image-icon-1.png"
+        items={[
+          {
+            imageUrl: "img/image-icon-2.png",
+            description: `Intrinsicly aggregate cutting-edge internal or "organic" sources through pandemic manufactured products. Synergistically.`,
+          },
+          {
+            imageUrl: "img/image-icon-3.png",
+            description:
+              "Completely administrate empowered e-tailers after extensive experiences. Holisticly leverage existing quality networks.",
+          },
+          {
+            imageUrl: "img/image-icon-4.png",
+            description:
+              "Intrinsicly incentivize functionalized metrics whereas go forward networks. Collaboratively fabricate clicks-and-mortar intellectual.",
+          },
+        ]}
+      />
+      <FeatureSection
+        imageUrl="img/image-14.png"
+        title="Share your photos with friends easily"
+        summary="Objectively deliver professional value with diverse
+        web-readiness. Collaboratively transition wireless customer
+        service without goal-oriented catalysts for change.
+        Collaboratively.
+      
+        Uniquely simplify sustainable applications whereas adaptive
+        schemas. Competently brand performance based content and."
+        items={[
+          { imageUrl: "img/image-icon-2.png" },
+          { imageUrl: "img/image-icon-3.png" },
+          { imageUrl: "img/image-icon-4.png" },
+          { imageUrl: "img/image-icon-1.png" },
+        ]}
+      />
       <DownloadSection />
       <PricingSection
         items={[
