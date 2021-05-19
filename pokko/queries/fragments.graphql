@@ -1,0 +1,8 @@
+fragment ModularPageContent on IModularPage {
+  ...MetadataContent
+}
+
+fragment MetadataContent on IMetadata {
+  description
+  title
+}
