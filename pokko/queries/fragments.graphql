@@ -1,8 +1,68 @@
-fragment ModularPageContent on IModularPage {
-  ...MetadataContent
+fragment ModularPage on ModularPage {
+  __typename
+  ...Metadata
+  title
+  description
+  components {
+    ...Component
+  }
 }
 
-fragment MetadataContent on IMetadata {
+fragment Component on ModularPage_Components {
+  __typename
+  ...HomeHero
+  ...HomePromo
+  ...HomeAbout
+  ...HomeFeature
+}
+
+fragment HomeHero on HomeHero {
+  title
+  subtitle
+  videoUrl
+  image {
+    url
+  }
+  backgroundImage {
+    url
+  }
+}
+
+fragment HomePromo on HomePromo {
+  title
+  subtitle
+  items {
+    title
+    description
+    icon
+  }
+}
+
+fragment HomeAbout on HomeAbout {
+  title
+  subtitle
+  items {
+    image {
+      url
+    }
+    description
+  }
+}
+
+fragment HomeFeature on HomeFeature {
+  title
+  summary
+  image {
+    url
+  }
+  items {
+    image {
+      url
+    }
+  }
+}
+
+fragment Metadata on IMetadata {
   description
   title
 }

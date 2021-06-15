@@ -1,0 +1,5 @@
+query GetPageByPath($path: [String]) {
+  entry(path: $path) {
+    ...ModularPage
+  }
+}
