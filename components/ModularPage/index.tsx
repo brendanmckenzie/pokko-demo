@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import * as React from "react";
 import {
   ModularPage as ModularPageModel,
@@ -68,6 +69,16 @@ const Module: React.FC<{ module: ModularPage_Components }> = ({ module }) => {
           items={module.items!.map((ent) => ({ imageUrl: ent!.image!.url }))}
         />
       );
+    case "HomeDownloads":
+      return (
+        <DownloadSection
+          title={module.title!}
+          summary={module.summary!}
+          apple={module.apple!.url!}
+          android={module.android!.url!}
+          imageUrl={module.image?.url}
+        />
+      );
     default:
       return <pre>Unknown module: {module.__typename}</pre>;
   }
@@ -80,7 +91,6 @@ export const ModularPage: React.FC<ModularPageProps> = ({ entry }) => (
       {entry.components?.map((ent, idx) => (
         <Module key={idx} module={ent as ModularPage_Components} />
       ))}
-      <DownloadSection />
       <PricingSection
         items={[
           {

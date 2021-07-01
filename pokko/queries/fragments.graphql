@@ -14,6 +14,7 @@ fragment Component on ModularPage_Components {
   ...HomePromo
   ...HomeAbout
   ...HomeFeature
+  ...HomeDownloads
 }
 
 fragment HomeHero on HomeHero {
@@ -65,4 +66,18 @@ fragment HomeFeature on HomeFeature {
 fragment Metadata on IMetadata {
   description
   title
+}
+
+fragment HomeDownloads on HomeDownloads {
+  title
+  summary
+  apple {
+    url
+  }
+  android {
+    url
+  }
+  image {
+    url
+  }
 }

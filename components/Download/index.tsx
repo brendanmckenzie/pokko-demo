@@ -1,6 +1,20 @@
 import React from "react";
 
-export const DownloadSection: React.FC = () => (
+export type DownloadSectionProps = {
+  title: string;
+  summary: string;
+  apple: string;
+  android: string;
+  imageUrl?: string;
+};
+
+export const DownloadSection: React.FC<DownloadSectionProps> = ({
+  title,
+  summary,
+  apple,
+  android,
+  imageUrl,
+}) => (
   <React.Fragment>
     <section
       className="download-section pt-100 background-img"
@@ -15,21 +29,14 @@ export const DownloadSection: React.FC = () => (
         <div className="row align-items-center justify-content-between">
           <div className="col-md-7">
             <div className="download-content text-white pb-100">
-              <h2 className="text-white">
-                Start Managing your apps business, more faster
-              </h2>
-              <p className="lead">
-                Objectively deliver professional value with diverse
-                web-readiness. Collaboratively transition wireless customer
-                service without goal-oriented catalysts for change.
-                Collaboratively.
-              </p>
+              <h2 className="text-white">{title}</h2>
+              <p className="lead">{summary}</p>
 
               <div className="download-btn">
-                <a href="/#" className="btn google-play-btn mr-3">
+                <a href={android} className="btn google-play-btn mr-3">
                   <span className="ti-android"></span> Google Play
                 </a>
-                <a href="/#" className="btn app-store-btn">
+                <a href={apple} className="btn app-store-btn">
                   <span className="ti-apple"></span> App Store
                 </a>
               </div>
@@ -37,11 +44,9 @@ export const DownloadSection: React.FC = () => (
           </div>
           <div className="col-md-4">
             <div className="download-img d-flex align-bottom">
-              <img
-                src="img/app-hand-top.png"
-                alt="download"
-                className="img-fluid"
-              />
+              {imageUrl ? (
+                <img src={imageUrl} alt="download" className="img-fluid" />
+              ) : null}
             </div>
           </div>
         </div>
