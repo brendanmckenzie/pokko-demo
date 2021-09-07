@@ -15,6 +15,7 @@ fragment Component on ModularPage_Components {
   ...HomeAbout
   ...HomeFeature
   ...HomeDownloads
+  ...HomePricing
 }
 
 fragment HomeHero on HomeHero {
@@ -79,5 +80,14 @@ fragment HomeDownloads on HomeDownloads {
   }
   image {
     url
+  }
+}
+
+fragment HomePricing on HomePricing {
+  items {
+    price
+    license
+    featured
+    features
   }
 }

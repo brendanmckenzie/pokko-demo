@@ -78,6 +78,21 @@ const Module: React.FC<{ module: ModularPage_Components }> = ({ module }) => {
           imageUrl={module.image?.url}
         />
       );
+    case "HomePricing":
+      console.log(module)
+      return (
+        <PricingSection
+          hideFaq={false}
+          items={
+            module.items?.map((ent) => ({
+              price: ent!.price!,
+              license: ent!.license!,
+              isFeatured: Boolean(ent!.featured!),
+              features: ent!.features!.map((str) => str!)!,
+            })) ?? []
+          }
+        />
+      );
     default:
       return <pre>Unknown module: {module.__typename}</pre>;
   }
@@ -90,53 +105,6 @@ export const ModularPage: React.FC<ModularPageProps> = ({ entry }) => (
       {entry.components?.map((ent, idx) => (
         <Module key={idx} module={ent as ModularPage_Components} />
       ))}
-      <PricingSection
-        items={[
-          {
-            price: "$29",
-            license: "Basic",
-            isFeatured: false,
-            features: [
-              "Push Notifications",
-              "Data Transfer",
-              "SQL Database",
-              "Search & SEO Analytics",
-              "24/7 Phone Support",
-              "2 months technical support",
-              "2+ profitable keyword",
-            ],
-          },
-          {
-            price: "$50",
-            license: "Popular",
-            isFeatured: true,
-            features: [
-              "Push Notifications",
-              "Data Transfer",
-              "SQL Database",
-              "Search & SEO Analytics",
-              "24/7 Phone Support",
-              "6 months technical support",
-              "30+ profitable keyword",
-            ],
-          },
-          {
-            price: "$120",
-            license: "Extended",
-            isFeatured: false,
-            features: [
-              "Push Notifications",
-              "Data Transfer",
-              "SQL Database",
-              "Search & SEO Analytics",
-              "24/7 Phone Support",
-              "1 year technical support",
-              "70+ profitable keyword",
-            ],
-          },
-        ]}
-        hideFaq={false}
-      />
       <Testimonial
         items={[
           {

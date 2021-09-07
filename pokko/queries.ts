@@ -18,8 +18,10 @@ export type Scalars = {
 
 export type Entries = {
   __typename?: 'Entries';
+  homePricing?: Maybe<HomePricing>;
   navigationItem?: Maybe<NavigationItem>;
   modularPage?: Maybe<ModularPage>;
+  homePricingItem?: Maybe<HomePricingItem>;
   homeFeature?: Maybe<HomeFeature>;
   homeDownloads?: Maybe<HomeDownloads>;
   homeHero?: Maybe<HomeHero>;
@@ -31,8 +33,10 @@ export type Entries = {
   homePromoItem?: Maybe<HomePromoItem>;
   settings?: Maybe<Settings>;
   homeAbout?: Maybe<HomeAbout>;
+  allHomePricing?: Maybe<HomePricingCollection>;
   allNavigationItem?: Maybe<NavigationItemCollection>;
   allModularPage?: Maybe<ModularPageCollection>;
+  allHomePricingItem?: Maybe<HomePricingItemCollection>;
   allHomeFeature?: Maybe<HomeFeatureCollection>;
   allHomeDownloads?: Maybe<HomeDownloadsCollection>;
   allHomeHero?: Maybe<HomeHeroCollection>;
@@ -47,12 +51,22 @@ export type Entries = {
 };
 
 
+export type EntriesHomePricingArgs = {
+  id: Scalars['String'];
+};
+
+
 export type EntriesNavigationItemArgs = {
   id: Scalars['String'];
 };
 
 
 export type EntriesModularPageArgs = {
+  id: Scalars['String'];
+};
+
+
+export type EntriesHomePricingItemArgs = {
   id: Scalars['String'];
 };
 
@@ -112,6 +126,12 @@ export type EntriesHomeAboutArgs = {
 };
 
 
+export type EntriesAllHomePricingArgs = {
+  skip?: Scalars['Int'];
+  take?: Scalars['Int'];
+};
+
+
 export type EntriesAllNavigationItemArgs = {
   filter?: Maybe<NavigationItemFilter>;
   orderBy?: Maybe<Array<Maybe<NavigationItemOrderBy>>>;
@@ -123,6 +143,14 @@ export type EntriesAllNavigationItemArgs = {
 export type EntriesAllModularPageArgs = {
   filter?: Maybe<ModularPageFilter>;
   orderBy?: Maybe<Array<Maybe<ModularPageOrderBy>>>;
+  skip?: Scalars['Int'];
+  take?: Scalars['Int'];
+};
+
+
+export type EntriesAllHomePricingItemArgs = {
+  filter?: Maybe<HomePricingItemFilter>;
+  orderBy?: Maybe<Array<Maybe<HomePricingItemOrderBy>>>;
   skip?: Scalars['Int'];
   take?: Scalars['Int'];
 };
@@ -430,6 +458,68 @@ export enum HomeHeroOrderBy {
   VideoUrlDesc = 'VIDEO_URL_DESC'
 }
 
+export type HomePricing = PokEntry & PokValue & IHomePricing & {
+  __typename?: 'HomePricing';
+  id: Scalars['String'];
+  pokko: Pokko;
+  items?: Maybe<Array<Maybe<HomePricingItem>>>;
+};
+
+export type HomePricingCollection = {
+  __typename?: 'HomePricingCollection';
+  nodes: Array<Maybe<HomePricing>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
+};
+
+export type HomePricingItem = PokEntry & PokValue & IHomePricingItem & {
+  __typename?: 'HomePricingItem';
+  id: Scalars['String'];
+  pokko: Pokko;
+  license?: Maybe<Scalars['String']>;
+  features?: Maybe<Array<Maybe<Scalars['String']>>>;
+  featured?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['String']>;
+};
+
+export type HomePricingItemCollection = {
+  __typename?: 'HomePricingItemCollection';
+  nodes: Array<Maybe<HomePricingItem>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
+};
+
+export type HomePricingItemCondition = {
+  license?: Maybe<Scalars['String']>;
+  features?: Maybe<Scalars['String']>;
+  featured?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['String']>;
+};
+
+export type HomePricingItemFilter = {
+  license?: Maybe<ScalarStringFilter>;
+  features?: Maybe<ScalarStringFilterMulti>;
+  price?: Maybe<ScalarStringFilter>;
+  id?: Maybe<ScalarIdFilter>;
+  and?: Maybe<Array<HomePricingItemFilter>>;
+  or?: Maybe<Array<HomePricingItemFilter>>;
+};
+
+export enum HomePricingItemOrderBy {
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  FeaturedAsc = 'FEATURED_ASC',
+  FeaturedDesc = 'FEATURED_DESC',
+  FeaturesAsc = 'FEATURES_ASC',
+  FeaturesDesc = 'FEATURES_DESC',
+  LicenseAsc = 'LICENSE_ASC',
+  LicenseDesc = 'LICENSE_DESC',
+  ModifiedAsc = 'MODIFIED_ASC',
+  ModifiedDesc = 'MODIFIED_DESC',
+  PriceAsc = 'PRICE_ASC',
+  PriceDesc = 'PRICE_DESC'
+}
+
 export type HomePromo = PokEntry & PokValue & IHomePromo & {
   __typename?: 'HomePromo';
   id: Scalars['String'];
@@ -563,6 +653,21 @@ export type IHomeHero = {
   backgroundImage?: Maybe<PokMedia>;
   subtitle?: Maybe<Scalars['String']>;
   videoUrl?: Maybe<Scalars['String']>;
+};
+
+export type IHomePricing = {
+  id: Scalars['String'];
+  pokko: Pokko;
+  items?: Maybe<Array<Maybe<HomePricingItem>>>;
+};
+
+export type IHomePricingItem = {
+  id: Scalars['String'];
+  pokko: Pokko;
+  license?: Maybe<Scalars['String']>;
+  features?: Maybe<Array<Maybe<Scalars['String']>>>;
+  featured?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['String']>;
 };
 
 export type IHomePromo = {
@@ -737,7 +842,7 @@ export enum ModularPageOrderBy {
   TitleDesc = 'TITLE_DESC'
 }
 
-export type ModularPage_Components = HomeHero | HomePromo | HomeFeature | HomeAbout | HomeDownloads;
+export type ModularPage_Components = HomeHero | HomePromo | HomeFeature | HomeAbout | HomeDownloads | HomePricing;
 
 export type NavigationItem = PokEntry & PokValue & INavigationItem & ILink & {
   __typename?: 'NavigationItem';
@@ -914,6 +1019,12 @@ export type ScalarStringFilter = {
   notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type ScalarStringFilterMulti = {
+  every?: Maybe<Array<Maybe<Scalars['String']>>>;
+  some?: Maybe<Array<Maybe<Scalars['String']>>>;
+  none?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
 export type Settings = PokEntry & PokValue & ISettings & {
   __typename?: 'Settings';
   id: Scalars['String'];
@@ -969,6 +1080,9 @@ export type ModularPageFragment = (
   ) | (
     { __typename?: 'HomeDownloads' }
     & Component_HomeDownloads_Fragment
+  ) | (
+    { __typename?: 'HomePricing' }
+    & Component_HomePricing_Fragment
   )>>> }
   & Metadata_ModularPage_Fragment
 );
@@ -998,7 +1112,12 @@ type Component_HomeDownloads_Fragment = (
   & HomeDownloadsFragment
 );
 
-export type ComponentFragment = Component_HomeHero_Fragment | Component_HomePromo_Fragment | Component_HomeFeature_Fragment | Component_HomeAbout_Fragment | Component_HomeDownloads_Fragment;
+type Component_HomePricing_Fragment = (
+  { __typename: 'HomePricing' }
+  & HomePricingFragment
+);
+
+export type ComponentFragment = Component_HomeHero_Fragment | Component_HomePromo_Fragment | Component_HomeFeature_Fragment | Component_HomeAbout_Fragment | Component_HomeDownloads_Fragment | Component_HomePricing_Fragment;
 
 export type HomeHeroFragment = (
   { __typename?: 'HomeHero' }
@@ -1076,6 +1195,14 @@ export type HomeDownloadsFragment = (
   )> }
 );
 
+export type HomePricingFragment = (
+  { __typename?: 'HomePricing' }
+  & { items?: Maybe<Array<Maybe<(
+    { __typename?: 'HomePricingItem' }
+    & Pick<HomePricingItem, 'price' | 'license' | 'featured' | 'features'>
+  )>>> }
+);
+
 export type GetPageByPathQueryVariables = Exact<{
   path?: Maybe<Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
 }>;
@@ -1083,7 +1210,7 @@ export type GetPageByPathQueryVariables = Exact<{
 
 export type GetPageByPathQuery = (
   { __typename?: 'Query' }
-  & { entry?: Maybe<{ __typename?: 'HomeAbout' } | { __typename?: 'HomeAboutItem' } | { __typename?: 'HomeDownloads' } | { __typename?: 'HomeFeature' } | { __typename?: 'HomeFeatureItem' } | { __typename?: 'HomeHero' } | { __typename?: 'HomePromo' } | { __typename?: 'HomePromoItem' } | { __typename?: 'Link' } | { __typename?: 'Metadata' } | (
+  & { entry?: Maybe<{ __typename?: 'HomeAbout' } | { __typename?: 'HomeAboutItem' } | { __typename?: 'HomeDownloads' } | { __typename?: 'HomeFeature' } | { __typename?: 'HomeFeatureItem' } | { __typename?: 'HomeHero' } | { __typename?: 'HomePricing' } | { __typename?: 'HomePricingItem' } | { __typename?: 'HomePromo' } | { __typename?: 'HomePromoItem' } | { __typename?: 'Link' } | { __typename?: 'Metadata' } | (
     { __typename?: 'ModularPage' }
     & ModularPageFragment
   ) | { __typename?: 'NavigationItem' } | { __typename?: 'Settings' }> }
@@ -1160,6 +1287,16 @@ export const HomeDownloadsFragmentDoc = gql`
   }
 }
     `;
+export const HomePricingFragmentDoc = gql`
+    fragment HomePricing on HomePricing {
+  items {
+    price
+    license
+    featured
+    features
+  }
+}
+    `;
 export const ComponentFragmentDoc = gql`
     fragment Component on ModularPage_Components {
   __typename
@@ -1168,12 +1305,14 @@ export const ComponentFragmentDoc = gql`
   ...HomeAbout
   ...HomeFeature
   ...HomeDownloads
+  ...HomePricing
 }
     ${HomeHeroFragmentDoc}
 ${HomePromoFragmentDoc}
 ${HomeAboutFragmentDoc}
 ${HomeFeatureFragmentDoc}
-${HomeDownloadsFragmentDoc}`;
+${HomeDownloadsFragmentDoc}
+${HomePricingFragmentDoc}`;
 export const ModularPageFragmentDoc = gql`
     fragment ModularPage on ModularPage {
   __typename
@@ -1247,6 +1386,12 @@ export type GetPageByPathQueryResult = Apollo.QueryResult<GetPageByPathQuery, Ge
     "IHomeHero": [
       "HomeHero"
     ],
+    "IHomePricing": [
+      "HomePricing"
+    ],
+    "IHomePricingItem": [
+      "HomePricingItem"
+    ],
     "IHomePromo": [
       "HomePromo"
     ],
@@ -1275,7 +1420,8 @@ export type GetPageByPathQueryResult = Apollo.QueryResult<GetPageByPathQuery, Ge
       "HomePromo",
       "HomeFeature",
       "HomeAbout",
-      "HomeDownloads"
+      "HomeDownloads",
+      "HomePricing"
     ],
     "PokEntry": [
       "HomeAbout",
@@ -1284,6 +1430,8 @@ export type GetPageByPathQueryResult = Apollo.QueryResult<GetPageByPathQuery, Ge
       "HomeFeature",
       "HomeFeatureItem",
       "HomeHero",
+      "HomePricing",
+      "HomePricingItem",
       "HomePromo",
       "HomePromoItem",
       "Link",
@@ -1299,6 +1447,8 @@ export type GetPageByPathQueryResult = Apollo.QueryResult<GetPageByPathQuery, Ge
       "HomeFeature",
       "HomeFeatureItem",
       "HomeHero",
+      "HomePricing",
+      "HomePricingItem",
       "HomePromo",
       "HomePromoItem",
       "Link",
